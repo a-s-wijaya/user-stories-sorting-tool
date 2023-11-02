@@ -120,19 +120,19 @@ function addInputFields() {
   option1.innerHTML = "Priority";
 
   const option2 = document.createElement("option");
-  option2.setAttribute("value", "MUST");
+  option2.setAttribute("value", "Must Have");
   option2.innerHTML = "Must";
 
   const option3 = document.createElement("option");
-  option3.setAttribute("value", "SHOULD");
+  option3.setAttribute("value", "Should Have");
   option3.innerHTML = "Should";
 
   const option4 = document.createElement("option");
-  option4.setAttribute("value", "COULD");
+  option4.setAttribute("value", "Could Have");
   option4.innerHTML = "Could";
 
   const option5 = document.createElement("option");
-  option5.setAttribute("value", "WONT");
+  option5.setAttribute("value", "Won't Have");
   option5.innerHTML = "Wont";
 
   businessValueInput.appendChild(option1);
