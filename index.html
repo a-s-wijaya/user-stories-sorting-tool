@@ -89,6 +89,21 @@
       </div>
     </section>
 
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-3 text-end">
+          <button
+            title="help"
+            id="help-button"
+            class="btn btn-primary rounded-circle pe-auto"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            <i class="fa-solid fa-question"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div
       class="mt-3 toast-container position-fixed top-0 start-50 translate-middle-x">
       <div
@@ -97,15 +112,88 @@
         role="alert"
         aria-live="assertive"
         aria-atomic="true">
-        <div class="toast-header bg-danger text-white">
+        <div id="toast-bg" class="toast-header bg-danger text-white">
           <strong class="me-auto" id="toast-type">Type</strong>
           <button
             type="button"
-            class="btn-close"
+            class="btn-close btn-close-white"
             data-bs-dismiss="toast"
             aria-label="Close"></button>
         </div>
         <div class="toast-body" id="toast-text">Message</div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">How to use</h1>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ol>
+              <li><strong>Add User Stories</strong></li>
+              <ul>
+                <li>
+                  Click on the <strong>Add User Story</strong> button to add
+                  more user stories.
+                </li>
+                <li>
+                  Fill in the <strong>User Story</strong>,
+                  <strong>Priority</strong>, and
+                  <strong>Effort Estimation</strong> fields.
+                </li>
+              </ul>
+              <li><strong>Sort User Stories</strong></li>
+              <ul>
+                <li>
+                  Click on the <strong>Sort</strong> button to sort the user
+                  stories.
+                </li>
+                <li>
+                  The user stories will be sorted by
+                  <strong>Priority</strong> and
+                  <strong>Effort Estimation</strong>.
+                </li>
+              </ul>
+              <li><strong>Reset User Stories</strong></li>
+              <ul>
+                <li>
+                  Click on the <strong>Reset</strong> button to reset the user
+                  stories.
+                </li>
+              </ul>
+            </ol>
+            <hr />
+            <p><strong>Input Example</strong></p>
+            <ul>
+              <li>
+                <strong>User Story</strong>: As a user, I want to be able to
+                login to the website.
+              </li>
+              <li><strong>Priority</strong>: Must Have</li>
+              <li><strong>Effort Estimation</strong>: 3</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
