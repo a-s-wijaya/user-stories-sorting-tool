@@ -157,7 +157,10 @@ function addInputFields() {
     "class",
     "effort-estimation-input form-control"
   );
-  effortEstimationInput.setAttribute("placeholder", "Effort Estimation");
+  effortEstimationInput.setAttribute(
+    "placeholder",
+    "Effort Estimation / Story Point"
+  );
 
   colDiv3.appendChild(effortEstimationInput);
 
