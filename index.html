@@ -26,8 +26,14 @@
           User Stories Sorting Tool
         </a>
         <div class="d-flex">
-          <button class="btn btn-outline-light" type="button" id="reset-button">
-            Reset
+          <button
+            class="btn btn-outline-light"
+            type="button"
+            id="reset-button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample">
+            Product Backlog
           </button>
         </div>
       </div>
@@ -35,13 +41,21 @@
 
     <section id="user-story" class="mb-3">
       <div class="container-md bg-white p-3 rounded shadow-sm mb-3">
-        <div class="row justify-content-end">
+        <div class="row justify-content-between">
+          <div class="col-6 col-md-4">
+            <input
+              type="text"
+              class="form-control"
+              id="project-name-input"
+              placeholder="Project Name" />
+          </div>
           <div class="col-6 col-md-3 text-end">
             <button id="add-button" class="btn btn-outline-primary mb-3">
               Add User Story
             </button>
           </div>
         </div>
+        <hr />
         <div id="dynamic-inputs">
           <div class="row">
             <div class="col-4 mb-2">
@@ -50,7 +64,7 @@
                 class="user-story-input form-control"
                 placeholder="User Story" />
             </div>
-            <div class="col-4 mb-2">
+            <div class="col-3 mb-2">
               <select
                 class="form-select business-value-input"
                 aria-label="Default select example"
@@ -193,6 +207,41 @@
               Close
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasExample"
+      aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+          Projects Product Backlog
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div>Your sorted product backlog user stories stored here</div>
+        <div class="dropdown mt-3">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown">
+            Your Projects
+          </button>
+          <ul class="dropdown-menu" id="project-select">
+            <li>
+              <a class="dropdown-item disabled" href="/"
+                >You haven't sorted anything</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
     </div>

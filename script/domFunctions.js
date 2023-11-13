@@ -94,6 +94,11 @@ function getColorClass(value) {
 
 function addInputFields() {
   const dynamicInputsContainer = document.getElementById("dynamic-inputs");
+  dynamicInputsContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-button")) {
+      e.target.parentElement.parentElement.remove();
+    }
+  });
 
   const rowDiv = document.createElement("div");
   rowDiv.setAttribute("class", "row");
@@ -109,7 +114,7 @@ function addInputFields() {
   colDiv1.appendChild(userStoryInput);
 
   const colDiv2 = document.createElement("div");
-  colDiv2.setAttribute("class", "col-4 mb-2");
+  colDiv2.setAttribute("class", "col-3 mb-2");
 
   const businessValueInput = document.createElement("select");
   businessValueInput.setAttribute("class", "form-select business-value-input");
@@ -156,9 +161,22 @@ function addInputFields() {
 
   colDiv3.appendChild(effortEstimationInput);
 
+  const colDiv4 = document.createElement("div");
+  colDiv4.setAttribute("class", "col-1 mb-2");
+
+  const removeButton = document.createElement("button");
+  removeButton.setAttribute("class", "btn btn-outline-danger remove-button");
+
+  const removeIcon = document.createElement("i");
+  removeIcon.setAttribute("class", "fa-solid fa-trash");
+  removeButton.appendChild(removeIcon);
+
+  colDiv4.appendChild(removeButton);
+
   rowDiv.appendChild(colDiv1);
   rowDiv.appendChild(colDiv2);
   rowDiv.appendChild(colDiv3);
+  rowDiv.appendChild(colDiv4);
 
   dynamicInputsContainer.appendChild(rowDiv);
 }

@@ -2,6 +2,7 @@ import { quickSort } from "./sortAlgorithms.js";
 import { displayResults, displayToast } from "./domFunctions.js";
 
 function sortAndDisplayData() {
+  const project = document.getElementById("project-name-input").value;
   const userStoriesInputs = document.querySelectorAll(".user-story-input");
   const businessValuesInputs = document.querySelectorAll(
     ".business-value-input"
@@ -35,6 +36,14 @@ function sortAndDisplayData() {
       emptyEffortEstimation = true;
     }
   });
+
+  if (project === "") {
+    displayToast(
+      "Error",
+      "Please fill the project name before sorting the data!"
+    );
+    return;
+  }
 
   if (emptyStory) {
     displayToast(
@@ -109,7 +118,39 @@ function sortAndDisplayData() {
     return 0;
   });
 
+  let backlogData = {
+    projectName: project,
+    sortedByBusinessValue: quicksortedByBusinessValue,
+    sortedByEffortEstimation: quicksortedByEffortEstimation,
+  };
+
+  const backlog = localStorage.getItem("productBacklog");
+  const backlogArray = JSON.parse(backlog);
+  backlogArray.push(backlogData);
+  localStorage.setItem("productBacklog", JSON.stringify(backlogArray));
+
   displayResults(quicksortedByBusinessValue, quicksortedByEffortEstimation);
+  loadData();
 }
 
-export { sortAndDisplayData };
+function loadData() {
+  if (!localStorage.getItem("productBacklog")) {
+    localStorage.setItem("productBacklog", JSON.stringify([]));
+  } else {
+    const data = localStorage.getItem("productBacklog");
+    const dataObject = JSON.parse(data);
+
+    const projectSelect = document.getElementById("project-select");
+    projectSelect.innerHTML = "";
+    dataObject.forEach((item, index) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.classList.add("dropdown-item");
+      a.innerHTML = `<a class="dropdown-item" href="backlog.html#${index}">${item.projectName}</a>`;
+      li.appendChild(a);
+      projectSelect.appendChild(li);
+    });
+  }
+}
+
+export { sortAndDisplayData, loadData };
