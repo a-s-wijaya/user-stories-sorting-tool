@@ -46,16 +46,16 @@ function generateListItems(sortedData) {
     let businessValue = "";
     switch (item.value) {
       case 1:
-        businessValue = "Must";
+        businessValue = "High Priority";
         break;
       case 2:
-        businessValue = "Should";
+        businessValue = "Medium Priority";
         break;
       case 3:
-        businessValue = "Could";
+        businessValue = "Low Priority";
         break;
       case 4:
-        businessValue = "Wont";
+        businessValue = "Future Priority";
         break;
       default:
         businessValue = "Unknown";
@@ -80,13 +80,13 @@ function generateListItems(sortedData) {
 function getColorClass(value) {
   switch (value) {
     case 1:
-      return "primary";
-    case 2:
-      return "success";
-    case 3:
-      return "warning";
-    case 4:
       return "danger";
+    case 2:
+      return "warning";
+    case 3:
+      return "success";
+    case 4:
+      return "primary";
     default:
       return "secondary";
   }
@@ -95,75 +95,111 @@ function getColorClass(value) {
 function addInputFields() {
   const dynamicInputsContainer = document.getElementById("dynamic-inputs");
 
-  const rowDiv = document.createElement("div");
-  rowDiv.setAttribute("class", "row");
+  const containerDiv = document.createElement("div");
+  containerDiv.setAttribute("class", "bg-white p-3 rounded shadow-sm mb-3");
 
-  const colDiv1 = document.createElement("div");
-  colDiv1.setAttribute("class", "col-4 mb-2");
+  // User Story Input
+  const userStoryInputGroup = document.createElement("div");
+  userStoryInputGroup.setAttribute("class", "input-group mb-3");
+
+  const userStoryLabel = document.createElement("span");
+  userStoryLabel.setAttribute("class", "input-group-text");
+  userStoryLabel.innerHTML = "User Story";
 
   const userStoryInput = document.createElement("input");
   userStoryInput.setAttribute("type", "text");
   userStoryInput.setAttribute("class", "user-story-input form-control");
-  userStoryInput.setAttribute("placeholder", "User Story");
+  userStoryInput.setAttribute(
+    "placeholder",
+    "<As a user, I want to be able to login to the website.>"
+  );
+  userStoryInput.setAttribute("aria-label", "Sizing example input");
+  userStoryInput.setAttribute("aria-describedby", "inputGroup-sizing-default");
 
-  colDiv1.appendChild(userStoryInput);
+  userStoryInputGroup.appendChild(userStoryLabel);
+  userStoryInputGroup.appendChild(userStoryInput);
 
-  const colDiv2 = document.createElement("div");
-  colDiv2.setAttribute("class", "col-4 mb-2");
+  // Business Value Input
+  const businessValueGroup = document.createElement("div");
+  businessValueGroup.setAttribute("class", "mb-3");
 
-  const businessValueInput = document.createElement("select");
-  businessValueInput.setAttribute("class", "form-select business-value-input");
-  businessValueInput.setAttribute("aria-label", "Default select example");
+  const businessValueLabel = document.createElement("p");
+  businessValueLabel.innerHTML =
+    "What's your take on the importance and relevance of this user story?";
+  businessValueGroup.appendChild(businessValueLabel);
 
-  const option1 = document.createElement("option");
-  option1.setAttribute("selected", "");
-  option1.innerHTML = "Priority";
+  const radioLabels = [
+    "Must have this",
+    "Should have this if possible",
+    "Could have this if this doesn't affect other",
+    "Won't have this time but would like in the future",
+  ];
 
-  const option2 = document.createElement("option");
-  option2.setAttribute("value", "MUST");
-  option2.innerHTML = "Must Have";
+  for (let i = 0; i < radioLabels.length; i++) {
+    const radioDiv = document.createElement("div");
+    radioDiv.setAttribute("class", "form-check");
 
-  const option3 = document.createElement("option");
-  option3.setAttribute("value", "SHOULD");
-  option3.innerHTML = "Should Have";
+    const radioInput = document.createElement("input");
+    radioInput.setAttribute("class", "form-check-input business-value-input");
+    radioInput.setAttribute("type", "radio");
+    radioInput.setAttribute(
+      "name",
+      `business-value-${dynamicInputsContainer.children.length + 1}`
+    );
+    radioInput.setAttribute(
+      "id",
+      `business-value-${dynamicInputsContainer.children.length + 1}-${i + 1}`
+    );
+    radioInput.setAttribute("value", radioLabels[i].toUpperCase());
 
-  const option4 = document.createElement("option");
-  option4.setAttribute("value", "COULD");
-  option4.innerHTML = "Could Have";
+    const radioLabel = document.createElement("label");
+    radioLabel.setAttribute("class", "form-check-label");
+    radioLabel.setAttribute(
+      "for",
+      `business-value-${dynamicInputsContainer.children.length + 1}-${i + 1}`
+    );
+    radioLabel.innerHTML = radioLabels[i];
 
-  const option5 = document.createElement("option");
-  option5.setAttribute("value", "WONT");
-  option5.innerHTML = "Won't Have";
+    radioDiv.appendChild(radioInput);
+    radioDiv.appendChild(radioLabel);
 
-  businessValueInput.appendChild(option1);
-  businessValueInput.appendChild(option2);
-  businessValueInput.appendChild(option3);
-  businessValueInput.appendChild(option4);
-  businessValueInput.appendChild(option5);
+    businessValueGroup.appendChild(radioDiv);
+  }
 
-  colDiv2.appendChild(businessValueInput);
+  // Effort Estimation Input
+  const effortEstimationInputGroup = document.createElement("div");
+  effortEstimationInputGroup.setAttribute("class", "input-group mb-3");
 
-  const colDiv3 = document.createElement("div");
-  colDiv3.setAttribute("class", "col-4 mb-2");
+  const effortEstimationLabel = document.createElement("span");
+  effortEstimationLabel.setAttribute("class", "input-group-text");
+  effortEstimationLabel.innerHTML = "Story Point";
 
   const effortEstimationInput = document.createElement("input");
   effortEstimationInput.setAttribute("type", "number");
   effortEstimationInput.setAttribute(
     "class",
-    "effort-estimation-input form-control"
+    "form-control effort-estimation-input"
   );
   effortEstimationInput.setAttribute(
     "placeholder",
     "Effort Estimation / Story Point"
   );
+  effortEstimationInput.setAttribute(
+    "aria-label",
+    "Effort Estimation / Story Point"
+  );
+  effortEstimationInput.setAttribute("aria-describedby", "effort-estimation");
 
-  colDiv3.appendChild(effortEstimationInput);
+  effortEstimationInputGroup.appendChild(effortEstimationLabel);
+  effortEstimationInputGroup.appendChild(effortEstimationInput);
 
-  rowDiv.appendChild(colDiv1);
-  rowDiv.appendChild(colDiv2);
-  rowDiv.appendChild(colDiv3);
+  // Appending to Container
+  containerDiv.appendChild(userStoryInputGroup);
+  containerDiv.appendChild(businessValueGroup);
+  containerDiv.appendChild(effortEstimationInputGroup);
 
-  dynamicInputsContainer.appendChild(rowDiv);
+  // Appending to Dynamic Inputs Container
+  dynamicInputsContainer.appendChild(containerDiv);
 }
 
 export { displayResults, addInputFields, displayToast };

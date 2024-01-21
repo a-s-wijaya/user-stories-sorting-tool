@@ -4,7 +4,7 @@ import { displayResults, displayToast } from "./domFunctions.js";
 function sortAndDisplayData() {
   const userStoriesInputs = document.querySelectorAll(".user-story-input");
   const businessValuesInputs = document.querySelectorAll(
-    ".business-value-input"
+    ".business-value-input:checked"
   );
   const effortEstimationsInputs = document.querySelectorAll(
     ".effort-estimation-input"
@@ -21,18 +21,42 @@ function sortAndDisplayData() {
   userStoriesInputs.forEach((input) => {
     if (input.value === "") {
       emptyStory = true;
+    } else {
+      userStories.push(input.value);
     }
   });
 
-  businessValuesInputs.forEach((input) => {
-    if (input.value === "Priority") {
-      emptyBusinessValue = true;
-    }
-  });
+  if (businessValuesInputs.length === 0) {
+    emptyBusinessValue = true;
+  } else {
+    businessValuesInputs.forEach((input) => {
+      const selectedRadio = document.querySelector(
+        `input[name="${input.name}"]:checked`
+      );
+      switch (selectedRadio ? selectedRadio.value.trim().toLowerCase() : "") {
+        case "must have this":
+          businessValues.push(1);
+          break;
+        case "should have this if possible":
+          businessValues.push(2);
+          break;
+        case "could have this if this doesn't affect other":
+          businessValues.push(3);
+          break;
+        case "won't have this time but would like in the future":
+          businessValues.push(4);
+          break;
+        default:
+          businessValues.push(0);
+      }
+    });
+  }
 
   effortEstimationsInputs.forEach((input) => {
     if (input.value === "") {
       emptyEffortEstimation = true;
+    } else {
+      effortEstimations.push(Number(input.value));
     }
   });
 
@@ -47,7 +71,7 @@ function sortAndDisplayData() {
   if (emptyBusinessValue) {
     displayToast(
       "Error",
-      "Please fill all priority values before sorting the data!"
+      "Please select priority for at least one user story before sorting the data!"
     );
     return;
   }
@@ -59,29 +83,6 @@ function sortAndDisplayData() {
     );
     return;
   }
-
-  userStoriesInputs.forEach((input) => userStories.push(input.value));
-  businessValuesInputs.forEach((input) => {
-    switch (input.value.trim().toLowerCase()) {
-      case "must":
-        businessValues.push(1);
-        break;
-      case "should":
-        businessValues.push(2);
-        break;
-      case "could":
-        businessValues.push(3);
-        break;
-      case "wont":
-        businessValues.push(4);
-        break;
-      default:
-        businessValues.push(0);
-    }
-  });
-  effortEstimationsInputs.forEach((input) =>
-    effortEstimations.push(Number(input.value))
-  );
 
   const data = userStories.map((story, index) => ({
     story,

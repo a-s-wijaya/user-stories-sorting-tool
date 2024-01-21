@@ -34,47 +34,97 @@
     </nav>
 
     <section id="user-story" class="mb-3">
-      <div class="container-md bg-white p-3 rounded shadow-sm mb-3">
+      <div class="container-md p-3 rounded">
         <div class="row justify-content-end">
-          <div class="col-6 col-md-3 text-end">
-            <button id="add-button" class="btn btn-outline-primary mb-3">
-              Add User Story
+          <div class="col-6 col-md-5 text-end">
+            <button id="add-button" class="btn btn-primary">
+              <i class="fa-solid fa-plus p-1"></i>Add User Story
             </button>
           </div>
         </div>
+      </div>
+      <div class="container-md">
         <div id="dynamic-inputs">
-          <div class="row">
-            <div class="col-4 mb-2">
+          <!-- <div class="bg-white p-3 rounded shadow-sm mb-3">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >User Story</span
+              >
               <input
                 type="text"
                 class="user-story-input form-control"
-                placeholder="User Story" />
+                placeholder="<As a user, I want to be able to login to the website.>"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" />
             </div>
-            <div class="col-4 mb-2">
-              <select
-                class="form-select business-value-input"
-                aria-label="Default select example"
-                required>
-                <option disabled selected>Priority</option>
-                <option value="MUST">Must Have</option>
-                <option value="SHOULD">Should Have</option>
-                <option value="COULD">Could Have</option>
-                <option value="WONT">Won't Have</option>
-              </select>
+            <div class="mb-3">
+              <p>
+                What's your take on the importance and relevance of this user
+                story?
+              </p>
+              <div class="form-check">
+                <input
+                  class="form-check-input business-value-input"
+                  type="radio"
+                  name="business-value"
+                  id="must"
+                  value="MUST" />
+                <label class="form-check-label" for="must"
+                  >Must have this</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input business-value-input"
+                  type="radio"
+                  name="business-value"
+                  id="should"
+                  value="SHOULD" />
+                <label class="form-check-label" for="should"
+                  >Should have this if possible</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input business-value-input"
+                  type="radio"
+                  name="business-value"
+                  id="could"
+                  value="COULD" />
+                <label class="form-check-label" for="could"
+                  >Could have this if this doesn't affect other</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input business-value-input"
+                  type="radio"
+                  name="business-value"
+                  id="wont"
+                  value="WONT" />
+                <label class="form-check-label" for="wont"
+                  >Won't have this time but would like in the future</label
+                >
+              </div>
             </div>
-            <div class="col-4 mb-2">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="effort-estimation"
+                >Story Point</span
+              >
               <input
                 type="number"
-                class="effort-estimation-input form-control"
-                placeholder="Effort Estimation / Story Point" />
+                class="form-control effort-estimation-input"
+                placeholder="Effort Estimation / Story Point"
+                aria-label="Effort Estimation / Story Point"
+                aria-describedby="effort-estimation" />
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="container">
         <div class="row">
           <button id="sort-button" class="btn btn-primary shadow-sm">
-            Sort
+            Sort and Prioritize User Stories
           </button>
         </div>
       </div>
